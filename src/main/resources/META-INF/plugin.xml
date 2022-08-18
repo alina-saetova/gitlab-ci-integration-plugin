@@ -1,0 +1,53 @@
+<idea-plugin>
+    <id>com.saetova.GitlabCIIntegration</id>
+    <name>GitlabCiIntegration</name>
+    <vendor email="alinasaetowa@gmail.com">GitlabCiIntegration</vendor>
+
+    <description>Gitlab Ci Integration for young devs yoo</description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij.modules.androidstudio">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="com.saetova.gitlabciintegration.service.LoggerService"/>
+        <projectService serviceImplementation="com.saetova.gitlabciintegration.service.GeneratorService"/>
+
+        <applicationConfigurable
+                provider="com.saetova.gitlabciintegration.settings.configurable.GitlabInfoConfigurableProvider"
+                id="GitlabInfoConfigurableProvider"/>
+
+        <applicationService
+                serviceImplementation="com.saetova.gitlabciintegration.settings.persistence.GitlabInfoComponent"/>
+
+        <toolWindow id="Gitlab CI Integration" anchor="bottom"
+                    factoryClass="com.saetova.gitlabciintegration.toolwindow.PipelinesToolWindowFactory"/>
+        <projectService serviceImplementation="com.saetova.gitlabciintegration.service.BackgroundTaskService"/>
+        <projectService serviceImplementation="com.saetova.gitlabciintegration.service.NotificationService"/>
+    </extensions>
+
+    <actions>
+        <action
+                id="com.saetova.gitlabciintegration.action.CreateFileAction"
+                class="com.saetova.gitlabciintegration.action.CreateFileAction"
+                text="Create Gitlab CI Configuration File">
+
+            <add-to-group group-id="NewGroup" anchor="first"/>
+        </action>
+
+        <action id="com.saetova.gitlabciintegration.action.OpenSettingsAction"
+                class="com.saetova.gitlabciintegration.action.OpenSettingsAction" text="Open Settings"/>
+
+        <action id="com.saetova.gitlabciintegration.action.RefreshLoadPipelinesAction"
+                class="com.saetova.gitlabciintegration.action.RefreshLoadPipelinesAction"
+                text="Refresh Pipelines"/>
+        <action id="com.saetova.gitlabciintegration.action.OpenPipelineInDialogAction"
+                class="com.saetova.gitlabciintegration.action.OpenPipelineInDialogAction" text="Open Dialog Details"/>
+
+        <action id="com.saetova.gitlabciintegration.action.OpenPipelineInBrowserAction"
+                class="com.saetova.gitlabciintegration.action.OpenPipelineInBrowserAction" text="Open In Browser"/>
+    </actions>
+
+</idea-plugin>

@@ -1,0 +1,12 @@
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle/
+build/
+*.iml
+.idea/
+/lib/
